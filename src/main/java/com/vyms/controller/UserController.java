@@ -57,7 +57,7 @@ public class UserController {
                 case "MANAGER":
                     return "redirect:/manager";
                 case "SALES":
-                    return "redirect:/sales-dashboard";
+                    return "redirect:/sales";
                 case "INVENTORY":
                     return "redirect:/inventory";
                 case "MECHANIC":
@@ -90,11 +90,15 @@ public class UserController {
 
         // Calculate Cost Breakdown for all sold vehicles
         BigDecimal totalPurchase = sales.stream()
-                .map(s -> s.getVehicle() != null && s.getVehicle().getPurchasePrice() != null ? s.getVehicle().getPurchasePrice() : BigDecimal.ZERO)
+                .map(s -> s.getVehicle() != null && s.getVehicle().getPurchasePrice() != null
+                        ? s.getVehicle().getPurchasePrice()
+                        : BigDecimal.ZERO)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal totalRepair = sales.stream()
-                .map(s -> s.getVehicle() != null && s.getVehicle().getRepairCost() != null ? s.getVehicle().getRepairCost() : BigDecimal.ZERO)
+                .map(s -> s.getVehicle() != null && s.getVehicle().getRepairCost() != null
+                        ? s.getVehicle().getRepairCost()
+                        : BigDecimal.ZERO)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         // Sales Pipeline Status
@@ -105,7 +109,7 @@ public class UserController {
         model.addAttribute("totalSales", totalSales);
         model.addAttribute("totalRevenue", totalRevenue);
         model.addAttribute("totalProfit", totalProfit);
-        
+
         // Chart 1: Financials
         model.addAttribute("chartTotalRevenue", totalRevenue);
         model.addAttribute("chartTotalPurchase", totalPurchase);
