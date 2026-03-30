@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -77,9 +77,9 @@
                         </td>
                         <td style="font-size:13px;color:var(--text-muted);" th:text="${v.chassisNumber}">CH-000</td>
                         <td th:text="${v.licensePlate}">ABC-123</td>
-                        <td th:text="${v.purchasePrice != null ? '$' + v.purchasePrice : '--'}">$0</td>
+                        <td th:text="${v.purchasePrice != null ? '$' + v.purchasePrice : '—'}">$0</td>
                         <td th:text="${v.repairCost != null ? '$' + v.repairCost : '$0'}">$0</td>
-                        <td th:text="${v.salePrice != null ? '$' + v.salePrice : '--'}">--</td>
+                        <td th:text="${v.salePrice != null ? '$' + v.salePrice : '—'}">—</td>
                         <td>
                             <span th:if="${v.status == 'SOLD'}" class="badge badge-sold">SOLD</span>
                             <span th:if="${v.status != 'SOLD'}" class="badge badge-unsold">UNSOLD</span>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -134,7 +134,7 @@
             const pw = document.getElementById('edit-password')?.value || '';
 
             if (!PAGE_RE_NAME.test(name)) {
-                setErr('err-username', 'Name must be 2â€“100 letters and spaces only.');
+                setErr('err-username', 'Name must be 2–100 letters and spaces only.');
                 ok = false;
             }
             if (!PAGE_RE_EMAIL.test(email)) {

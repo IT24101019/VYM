@@ -44,8 +44,6 @@ public class Payroll {
     private Integer presentDays;
     private Integer halfDays;
     private Integer absentDays;
-    private Integer offDays;        // total OFF_DAY records in period
-    private Integer unpaidOffDays;  // OFF_DAY beyond allowance (deducted for permanent workers)
 
     // ─── Phase 2: OT & Commission ─────────────────────────────────────────────
     /** Total OT hours across the period (hours beyond 8h/day) */
@@ -169,22 +167,6 @@ public class Payroll {
 
     public void setAbsentDays(Integer absentDays) {
         this.absentDays = absentDays;
-    }
-
-    public Integer getOffDays() {
-        return offDays;
-    }
-
-    public void setOffDays(Integer offDays) {
-        this.offDays = offDays;
-    }
-
-    public Integer getUnpaidOffDays() {
-        return unpaidOffDays;
-    }
-
-    public void setUnpaidOffDays(Integer unpaidOffDays) {
-        this.unpaidOffDays = unpaidOffDays;
     }
 
     public BigDecimal getOtPay() {

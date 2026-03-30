@@ -1,10 +1,10 @@
-﻿/* Manager CSS - matches overall design system */
+/* Manager CSS - matches overall design system */
 :root {
     --primary: #1d4ed8;
     --primary-light: #3b82f6;
-    --sidebar-bg: #334155;
-    --sidebar-hover: #475569;
-    --sidebar-active: #2563eb;
+    --sidebar-bg: #0f172a;
+    --sidebar-hover: #1e293b;
+    --sidebar-active: #3b82f6;
     --text-main: #0f172a;
     --text-muted: #64748b;
     --text-light: #f8fafc;
@@ -41,7 +41,7 @@ body {
     min-height: 100vh;
 }
 
-/* â”€â”€ Sidebar â”€â”€ */
+/* ── Sidebar ── */
 .sidebar {
     width: 240px;
     background: var(--sidebar-bg);
@@ -52,7 +52,6 @@ body {
     position: fixed;
     height: 100vh;
     z-index: 100;
-    box-shadow: 4px 0 20px rgba(15, 23, 42, 0.12);
 }
 
 .sidebar-header {
@@ -67,7 +66,7 @@ body {
 }
 
 .sidebar-header p {
-    color: #dbeafe;
+    color: #94a3b8;
     font-size: 12px;
 }
 
@@ -97,7 +96,7 @@ body {
 }
 
 .user-info p {
-    color: #dbeafe;
+    color: #94a3b8;
     font-size: 11px;
 }
 
@@ -116,7 +115,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    color: #e2e8f0;
+    color: #cbd5e1;
     text-decoration: none;
     border-radius: 8px;
     font-size: 14px;
@@ -132,7 +131,6 @@ body {
 .nav-link.active {
     background: var(--sidebar-active);
     color: white;
-    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
 }
 
 .nav-link i {
@@ -146,7 +144,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, .1);
 }
 
-/* â”€â”€ Main â”€â”€ */
+/* ── Main ── */
 .main-content {
     flex-grow: 1;
     margin-left: 240px;
@@ -165,7 +163,6 @@ body {
 .page-title h1 {
     font-size: 26px;
     font-weight: 700;
-    color: #111827;
     margin-bottom: 4px;
 }
 
@@ -174,7 +171,7 @@ body {
     font-size: 14px;
 }
 
-/* â”€â”€ Role Chips â”€â”€ */
+/* ── Role Chips ── */
 .role-chips {
     display: flex;
     gap: 8px;
@@ -208,7 +205,7 @@ body {
     color: white;
 }
 
-/* â”€â”€ Buttons â”€â”€ */
+/* ── Buttons ── */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -261,7 +258,7 @@ body {
     font-size: 11px;
 }
 
-/* â”€â”€ Metrics â”€â”€ */
+/* ── Metrics ── */
 .metrics-grid {
     display: grid;
     gap: 20px;
@@ -338,7 +335,7 @@ body {
     color: var(--teal);
 }
 
-/* â”€â”€ Charts â”€â”€ */
+/* ── Charts ── */
 .charts-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -374,7 +371,7 @@ body {
     position: relative;
 }
 
-/* â”€â”€ Activity Feed â”€â”€ */
+/* ── Activity Feed ── */
 .activity-feed {
     background: var(--bg-card);
     border-radius: 12px;
@@ -421,7 +418,7 @@ body {
     color: #94a3b8;
 }
 
-/* â”€â”€ Tables â”€â”€ */
+/* ── Tables ── */
 .table-card {
     background: var(--bg-card);
     border-radius: 12px;
@@ -470,7 +467,7 @@ tr:last-child td {
     border-bottom: none;
 }
 
-/* â”€â”€ Badges â”€â”€ */
+/* ── Badges ── */
 .badge {
     display: inline-block;
     padding: 4px 10px;
@@ -560,7 +557,7 @@ tr:last-child td {
     font-weight: 700;
 }
 
-/* â”€â”€ Tab Switcher â”€â”€ */
+/* ── Tab Switcher ── */
 .tab-switcher {
     display: inline-flex;
     background: var(--bg-card);
@@ -595,7 +592,7 @@ tr:last-child td {
     background: #f1f5f9;
 }
 
-/* â”€â”€ Tab Panels â”€â”€ */
+/* ── Tab Panels ── */
 .tab-panel {
     display: none;
 }
@@ -604,7 +601,7 @@ tr:last-child td {
     display: block;
 }
 
-/* â”€â”€ Summary Card (green) â”€â”€ */
+/* ── Summary Card (green) ── */
 .summary-card {
     background: linear-gradient(135deg, #f0fdf4, #dcfce7);
     border: 1px solid #bbf7d0;
@@ -640,7 +637,7 @@ tr:last-child td {
     color: #86efac;
 }
 
-/* â”€â”€ Period Form â”€â”€ */
+/* ── Period Form ── */
 .period-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -688,14 +685,14 @@ tr:last-child td {
     box-shadow: 0 0 0 3px rgba(29, 78, 216, .1);
 }
 
-/* â”€â”€ Mark Attendance btn area â”€â”€ */
+/* ── Mark Attendance btn area ── */
 .page-actions {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
 }
 
-/* â”€â”€ Modal â”€â”€ */
+/* ── Modal ── */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -804,26 +801,25 @@ select.form-control {
 .sidebar-logo img:hover { opacity: 0.85; }
 .sidebar-header {
     padding: 20px 20px 16px !important;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.15);
 }
-.sidebar-header h2 { font-size: 15px !important; color: #eff6ff !important; }
-.sidebar-header p  { font-size: 11px !important; color: #dbeafe !important; }
+.sidebar-header h2 { font-size: 15px !important; color: #e0f2fe !important; }
+.sidebar-header p  { font-size: 11px !important; color: #7dd3fc !important; }
 
 /* -- Professional UI Polish -- */
 /* Enhanced nav active state */
 .nav-link.active {
-    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+    background: linear-gradient(135deg, #2563eb, #0369a1) !important;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.4);
 }
 /* Metric card hover lift */
 .metric-card {
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .metric-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
 }
 /* Table row hover */
 tbody tr:hover {
@@ -838,14 +834,12 @@ tbody tr:hover {
     transition: box-shadow 0.2s;
 }
 .chart-card:hover, .table-card:hover {
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
 }
 /* Page title gradient */
 .page-title h1 {
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
-

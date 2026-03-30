@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* â”€â”€ Extra report-page styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ── Extra report-page styles ─────────────────────────── */
         .section-title {
             font-size: 16px;
             font-weight: 700;
@@ -197,9 +197,9 @@
             </a>
         </div>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- SALES SECTION                                                  -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-shopping-cart" style="color:#3b82f6;margin-right:8px;"></i>Sales
             Overview</div>
 
@@ -269,14 +269,14 @@
                 </thead>
                 <tbody>
                     <tr th:each="row : ${profitRows}">
-                        <td style="font-weight:600;" th:text="${row.vehicle}">--</td>
+                        <td style="font-weight:600;" th:text="${row.vehicle}">—</td>
                         <td>
                             <span class="badge"
                                 th:classappend="${row.buyerType == 'REGULAR_CUSTOMER'} ? 'badge-regular' : (${row.buyerType == 'EXPORT'} ? 'badge-export' : 'badge-auction')"
                                 th:text="${row.buyerType == 'REGULAR_CUSTOMER'} ? 'Regular Customer' : (${row.buyerType == 'EXPORT'} ? 'Export' : 'Auction')">
-                                --</span>
+                                —</span>
                         </td>
-                        <td th:text="${row.saleDate}">--</td>
+                        <td th:text="${row.saleDate}">—</td>
                         <td th:text="${'$' + row.purchase}">$0</td>
                         <td th:text="${'$' + row.repair}">$0</td>
                         <td th:text="${'$' + row.salePrice}">$0</td>
@@ -296,9 +296,9 @@
 
         <hr class="divider-section">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- INVENTORY SECTION                                             -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-car" style="color:#8b5cf6;margin-right:8px;"></i>Inventory Overview
         </div>
 
@@ -327,9 +327,9 @@
 
         <hr class="divider-section">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- MECHANIC SECTION                                              -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-tools" style="color:#f59e0b;margin-right:8px;"></i>Mechanic &amp;
             Repair Overview</div>
 
@@ -360,26 +360,26 @@
                 <tbody>
                     <tr th:each="r : ${recentRepairs}">
                         <td>
-                            <div style="font-weight:600;" th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '--'}">
-                                --</div>
+                            <div style="font-weight:600;" th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '—'}">
+                                —</div>
                             <div style="font-size:12px;color:var(--text-muted);"
                                 th:text="${r.vehicle != null ? r.vehicle.licensePlate : ''}"></div>
                         </td>
-                        <td style="max-width:200px;" th:text="${r.description}">--</td>
+                        <td style="max-width:200px;" th:text="${r.description}">—</td>
                         <td>
                             <span class="repair-badge badge-int" th:if="${r.repairType == 'INTERNAL'}">Internal</span>
                             <span class="repair-badge badge-ext" th:if="${r.repairType == 'EXTERNAL'}">External</span>
                             <span th:if="${r.repairType != 'INTERNAL' and r.repairType != 'EXTERNAL'}"
-                                th:text="${r.repairType}">--</span>
+                                th:text="${r.repairType}">—</span>
                         </td>
                         <td style="font-weight:600;" th:text="${r.cost != null ? '$' + r.cost : '$0'}">$0</td>
-                        <td th:text="${r.repairDate}">--</td>
+                        <td th:text="${r.repairDate}">—</td>
                         <td>
                             <span class="repair-badge badge-inspected"
                                 th:if="${r.status == 'INSPECTED'}">Inspected</span>
                             <span class="repair-badge badge-pending" th:if="${r.status == 'PENDING'}">Pending</span>
                             <span th:if="${r.status != 'INSPECTED' and r.status != 'PENDING'}"
-                                th:text="${r.status}">--</span>
+                                th:text="${r.status}">—</span>
                         </td>
                     </tr>
                     <tr th:if="${recentRepairs == null or recentRepairs.empty}">
@@ -395,7 +395,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script th:inline="javascript">
-        // â”€â”€ Data from server â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Data from server ───────────────────────────────────────────────────
         const monthLabels = /*[[${monthLabels}]]*/[];
         const monthlyRevenue = /*[[${monthlyRevenue}]]*/[];
         const monthlyProfit = /*[[${monthlyProfit}]]*/[];
@@ -407,7 +407,7 @@
         const btFriendly = buyerTypeLabels.map(l =>
             l === 'REGULAR_CUSTOMER' ? 'Regular Customer' : (l === 'EXPORT' ? 'Export' : 'Auction'));
 
-        // â”€â”€ Monthly Revenue & Profit Bar Chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Monthly Revenue & Profit Bar Chart ────────────────────────────────
         new Chart(document.getElementById('profitRevenueChart'), {
             type: 'bar',
             data: {
@@ -430,7 +430,7 @@
             }
         });
 
-        // â”€â”€ Buyer Type Pie Chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Buyer Type Pie Chart ──────────────────────────────────────────────
         new Chart(document.getElementById('buyerTypeChart'), {
             type: 'pie',
             data: {
@@ -450,7 +450,7 @@
             }
         });
 
-        // â”€â”€ Monthly Repair Cost Bar Chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Monthly Repair Cost Bar Chart ─────────────────────────────────────
         new Chart(document.getElementById('repairCostChart'), {
             type: 'bar',
             data: {

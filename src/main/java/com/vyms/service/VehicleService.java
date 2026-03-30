@@ -33,26 +33,4 @@ public class VehicleService {
     public void deleteById(Long id) {
         vehicleRepository.deleteById(id);
     }
-
-    public boolean existsByChassisNumber(String chassisNumber) {
-        return chassisNumber != null && vehicleRepository.existsByChassisNumberIgnoreCase(chassisNumber.trim());
-    }
-
-    public boolean existsByLicensePlate(String licensePlate) {
-        return licensePlate != null && vehicleRepository.existsByLicensePlateIgnoreCase(licensePlate.trim());
-    }
-
-    public boolean existsOtherByChassisNumber(String chassisNumber, Long currentId) {
-        if (chassisNumber == null) return false;
-        return vehicleRepository.findByChassisNumberIgnoreCase(chassisNumber.trim())
-                .map(v -> !v.getId().equals(currentId))
-                .orElse(false);
-    }
-
-    public boolean existsOtherByLicensePlate(String licensePlate, Long currentId) {
-        if (licensePlate == null) return false;
-        return vehicleRepository.findByLicensePlateIgnoreCase(licensePlate.trim())
-                .map(v -> !v.getId().equals(currentId))
-                .orElse(false);
-    }
 }

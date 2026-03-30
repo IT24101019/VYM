@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -124,26 +124,26 @@
                 <tbody>
                     <tr th:each="r : ${repairs}">
                         <td>
-                            <div style="font-weight:600;" th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '--'}">
+                            <div style="font-weight:600;" th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '—'}">
                                 Vehicle</div>
                             <div style="font-size:12px;color:var(--info);"
                                 th:text="${r.vehicle != null ? r.vehicle.licensePlate : ''}">Plate</div>
                         </td>
-                        <td style="max-width:220px;" th:text="${r.description}">--</td>
+                        <td style="max-width:220px;" th:text="${r.description}">—</td>
                         <td>
                             <span th:if="${r.repairType == 'INTERNAL'}" class="badge badge-onleave">Internal</span>
                             <span th:if="${r.repairType == 'EXTERNAL'}" class="badge badge-warning"
                                 style="background:#fef3c7;color:#f59e0b;">External</span>
                             <span th:if="${r.repairType != 'INTERNAL' and r.repairType != 'EXTERNAL'}"
-                                th:text="${r.repairType}">--</span>
+                                th:text="${r.repairType}">—</span>
                         </td>
                         <td class="font-bold" th:text="${r.cost != null ? '$' + r.cost : '$0'}">$0</td>
-                        <td th:text="${r.repairDate}">--</td>
+                        <td th:text="${r.repairDate}">—</td>
                         <td>
                             <span th:if="${r.status == 'INSPECTED'}" class="badge badge-inspected">Inspected</span>
                             <span th:if="${r.status == 'PENDING'}" class="badge badge-pending">Pending</span>
                             <span th:if="${r.status != 'INSPECTED' and r.status != 'PENDING'}"
-                                th:text="${r.status}">--</span>
+                                th:text="${r.status}">—</span>
                         </td>
                         <td>
                             <button class="btn btn-outline btn-sm" th:data-id="${r.id}" th:data-desc="${r.description}"
