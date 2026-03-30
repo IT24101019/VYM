@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -215,12 +215,12 @@
                                 class="badge badge-contract">Contract</span>
                             <span
                                 th:if="${user.contractType == null or (user.contractType != 'PERMANENT' and user.contractType != 'CONTRACT')}"
-                                style="color:var(--text-muted);font-size:13px;">--</span>
+                                style="color:var(--text-muted);font-size:13px;">—</span>
                         </td>
                         <td>
                             <span th:if="${user.salaryRate != null}"
-                                th:text="${(user.contractType == 'CONTRACT' ? '$' + user.salaryRate + ' /day' : '$' + user.salaryRate + ' /month')}">--</span>
-                            <span th:if="${user.salaryRate == null}" style="color:var(--text-muted);">--</span>
+                                th:text="${(user.contractType == 'CONTRACT' ? '$' + user.salaryRate + ' /day' : '$' + user.salaryRate + ' /month')}">—</span>
+                            <span th:if="${user.salaryRate == null}" style="color:var(--text-muted);">—</span>
                         </td>
                         <td style="display:flex;gap:8px;align-items:center;">
                             <button class="btn btn-outline btn-sm edit-btn" onclick="openEditModal(this)"
@@ -245,7 +245,7 @@
         </div>
     </main>
 
-    <!-- â•â•â• Add Employee Modal â•â•â• -->
+    <!-- ═══ Add Employee Modal ═══ -->
     <div class="modal-overlay" id="createModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -267,7 +267,7 @@
                     <div class="form-group">
                         <label class="form-label">Role <span style="color:var(--danger)">*</span></label>
                         <select name="role" class="form-control" required>
-                            <option value="">Select roleâ€¦</option>
+                            <option value="">Select role…</option>
                             <option th:each="role : ${roles}" th:value="${role}" th:text="${role}">Role</option>
                         </select>
                     </div>
@@ -307,7 +307,7 @@
         </div>
     </div>
 
-    <!-- â•â•â• Edit Employee Modal â•â•â• -->
+    <!-- ═══ Edit Employee Modal ═══ -->
     <div class="modal-overlay" id="editModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -368,7 +368,7 @@
     </div>
 
     <script>
-        /* â”€â”€ Employee Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ── Employee Validation ─────────────────────────────── */
         const EMP_RE_EMAIL = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
         const EMP_RE_NAME = /^[A-Za-z .'-]{2,100}$/;
 
@@ -393,7 +393,7 @@
             const pw = pwEl?.value || '';
 
             if (!EMP_RE_NAME.test(name)) {
-                empSetError('err-' + prefix + '-name', 'Name must be 2â€“100 letters and spaces only.');
+                empSetError('err-' + prefix + '-name', 'Name must be 2–100 letters and spaces only.');
                 ok = false;
             }
             if (!EMP_RE_EMAIL.test(email)) {
@@ -410,13 +410,13 @@
             }
             return ok;
         }
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────────────────── */
 
         // Create modal
         function openCreateModal() { document.getElementById('createModal').classList.add('active'); clearEmpErrors('add'); }
         function closeCreateModal() { document.getElementById('createModal').classList.remove('active'); }
 
-        // Edit modal -- reads safe data-* attributes, no escape issues
+        // Edit modal — reads safe data-* attributes, no escape issues
         function openEditModal(btn) {
             const d = btn.dataset;
             document.getElementById('editForm').action = '/admin/users/edit/' + d.id;

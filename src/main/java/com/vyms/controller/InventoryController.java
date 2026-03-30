@@ -1,19 +1,14 @@
 package com.vyms.controller;
 
 import com.vyms.entity.Vehicle;
-import com.vyms.service.PdfReportService;
 import com.vyms.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -28,15 +23,13 @@ import java.util.stream.Collectors;
 public class InventoryController {
 
     private final VehicleService vehicleService;
-    private final PdfReportService pdfReportService;
 
-    @Value("${app.upload-dir}")
-    private String uploadDir;
+    // Upload directory: inside the project's static/uploads folder
+    private static final String UPLOAD_DIR = "src/main/resources/static/uploads/";
 
     @Autowired
-    public InventoryController(VehicleService vehicleService, PdfReportService pdfReportService) {
+    public InventoryController(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
-        this.pdfReportService = pdfReportService;
     }
 
     private static final Set<String> KNOWN_BRANDS = new LinkedHashSet<>(Arrays.asList(
@@ -102,54 +95,6 @@ public class InventoryController {
         return "inventory/vehicles";
     }
 
-    // ── Reports ──────────────────────────────────────────────────────────────
-
-    @GetMapping("/reports")
-    public String reportsPage(Model model) {
-        List<Vehicle> vehicles = vehicleService.findAll();
-        long totalVehicles = vehicles.size();
-        long soldCount   = vehicles.stream().filter(v -> "SOLD".equalsIgnoreCase(v.getStatus())).count();
-        long unsoldCount = totalVehicles - soldCount;
-
-        BigDecimal totalInvestment = vehicles.stream()
-            .filter(v -> !"SOLD".equalsIgnoreCase(v.getStatus()))
-            .map(v -> {
-                BigDecimal p = v.getPurchasePrice() != null ? v.getPurchasePrice() : BigDecimal.ZERO;
-                BigDecimal r = v.getRepairCost()    != null ? v.getRepairCost()    : BigDecimal.ZERO;
-                return p.add(r);
-            })
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        BigDecimal potentialRevenue = vehicles.stream()
-            .filter(v -> !"SOLD".equalsIgnoreCase(v.getStatus()))
-            .map(v -> v.getSalePrice() != null ? v.getSalePrice() : BigDecimal.ZERO)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        BigDecimal soldRevenue = vehicles.stream()
-            .filter(v -> "SOLD".equalsIgnoreCase(v.getStatus()))
-            .map(v -> v.getSalePrice() != null ? v.getSalePrice() : BigDecimal.ZERO)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        model.addAttribute("vehicles", vehicles);
-        model.addAttribute("totalVehicles", totalVehicles);
-        model.addAttribute("soldCount", soldCount);
-        model.addAttribute("unsoldCount", unsoldCount);
-        model.addAttribute("totalInvestment", totalInvestment);
-        model.addAttribute("potentialRevenue", potentialRevenue);
-        model.addAttribute("soldRevenue", soldRevenue);
-        return "inventory/reports";
-    }
-
-    @GetMapping("/reports/download")
-    public ResponseEntity<byte[]> downloadReport() {
-        List<Vehicle> vehicles = vehicleService.findAll();
-        byte[] pdf = pdfReportService.inventoryStockReport(vehicles);
-        return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=inventory-stock-report.pdf")
-            .contentType(MediaType.APPLICATION_PDF)
-            .body(pdf);
-    }
-
     // Add vehicle - POST
     @PostMapping("/vehicles/add")
     public String addVehicle(
@@ -157,24 +102,11 @@ public class InventoryController {
             @RequestParam("licensePlate") String licensePlate,
             @RequestParam("vehicleModel") String vehicleModel,
             @RequestParam(name = "purchasePrice", required = false) BigDecimal purchasePrice,
-            @RequestParam(name = "imageFile", required = false) MultipartFile imageFile,
-            RedirectAttributes ra) throws IOException {
-
-        String chassis = chassisNumber != null ? chassisNumber.trim().toUpperCase() : "";
-        String plate = licensePlate != null ? licensePlate.trim().toUpperCase() : "";
-
-        if (vehicleService.existsByChassisNumber(chassis)) {
-            ra.addFlashAttribute("uploadError", "A vehicle with this chassis number already exists.");
-            return "redirect:/inventory/vehicles";
-        }
-        if (vehicleService.existsByLicensePlate(plate)) {
-            ra.addFlashAttribute("uploadError", "A vehicle with this license plate already exists.");
-            return "redirect:/inventory/vehicles";
-        }
+            @RequestParam(name = "imageFile", required = false) MultipartFile imageFile) throws IOException {
 
         Vehicle v = new Vehicle();
-        v.setChassisNumber(chassis);
-        v.setLicensePlate(plate);
+        v.setChassisNumber(chassisNumber);
+        v.setLicensePlate(licensePlate);
         v.setVehicleModel(vehicleModel);
         v.setPurchasePrice(purchasePrice != null ? purchasePrice : BigDecimal.ZERO);
         v.setRepairCost(BigDecimal.ZERO);
@@ -186,7 +118,6 @@ public class InventoryController {
         }
 
         vehicleService.save(v);
-        ra.addFlashAttribute("successMsg", "Vehicle added successfully.");
         return "redirect:/inventory/vehicles";
     }
 
@@ -212,26 +143,13 @@ public class InventoryController {
             @RequestParam(name = "repairCost", required = false) BigDecimal repairCost,
             @RequestParam(name = "salePrice", required = false) BigDecimal salePrice,
             @RequestParam(name = "status", required = false) String status,
-            @RequestParam(name = "imageFile", required = false) MultipartFile imageFile,
-            RedirectAttributes ra) throws IOException {
-
-        String chassis = chassisNumber != null ? chassisNumber.trim().toUpperCase() : "";
-        String plate = licensePlate != null ? licensePlate.trim().toUpperCase() : "";
-
-        if (vehicleService.existsOtherByChassisNumber(chassis, id)) {
-            ra.addFlashAttribute("uploadError", "Another vehicle already has this chassis number.");
-            return "redirect:/inventory/vehicles";
-        }
-        if (vehicleService.existsOtherByLicensePlate(plate, id)) {
-            ra.addFlashAttribute("uploadError", "Another vehicle already has this license plate.");
-            return "redirect:/inventory/vehicles";
-        }
+            @RequestParam(name = "imageFile", required = false) MultipartFile imageFile) throws IOException {
 
         Optional<Vehicle> vehicleOpt = vehicleService.findById(id);
         if (vehicleOpt.isPresent()) {
             Vehicle v = vehicleOpt.get();
-            v.setChassisNumber(chassis);
-            v.setLicensePlate(plate);
+            v.setChassisNumber(chassisNumber);
+            v.setLicensePlate(licensePlate);
             v.setVehicleModel(vehicleModel);
             v.setPurchasePrice(purchasePrice != null ? purchasePrice : BigDecimal.ZERO);
             v.setRepairCost(repairCost != null ? repairCost : BigDecimal.ZERO);
@@ -246,7 +164,6 @@ public class InventoryController {
             }
 
             vehicleService.save(v);
-            ra.addFlashAttribute("successMsg", "Vehicle updated successfully.");
         }
         return "redirect:/inventory/vehicles";
     }
@@ -260,15 +177,17 @@ public class InventoryController {
 
     // Helper: save uploaded image file, return path
     private String saveImage(MultipartFile imageFile) throws IOException {
-        Path uploadRoot = Paths.get(uploadDir).toAbsolutePath().normalize();
-        Files.createDirectories(uploadRoot);
+        File uploadDir = new File(UPLOAD_DIR);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
         String ext = "";
         String original = imageFile.getOriginalFilename();
         if (original != null && original.contains(".")) {
             ext = original.substring(original.lastIndexOf("."));
         }
         String filename = UUID.randomUUID() + ext;
-        Path dest = uploadRoot.resolve(filename);
+        Path dest = Paths.get(UPLOAD_DIR + filename);
         Files.copy(imageFile.getInputStream(), dest, StandardCopyOption.REPLACE_EXISTING);
         return "/uploads/" + filename;
     }

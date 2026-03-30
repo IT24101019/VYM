@@ -14,25 +14,24 @@ public class DataInitializer {
     @Bean
     public CommandLineRunner seedUsers(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         return args -> {
-            createUserIfMissing(userRepository, passwordEncoder, "Admin", "admin@vehicleyard.com", "password",
-                    Role.ADMIN);
-            createUserIfMissing(userRepository, passwordEncoder, "Manager", "manager@vehicleyard.com", "password",
-                    Role.MANAGER);
-            createUserIfMissing(userRepository, passwordEncoder, "Sales", "sales@vehicleyard.com", "password",
-                    Role.SALES);
-            createUserIfMissing(userRepository, passwordEncoder, "Inventory", "inventory@vehicleyard.com", "password",
-                    Role.INVENTORY);
-            createUserIfMissing(userRepository, passwordEncoder, "Mechanic", "mechanic@vehicleyard.com", "password",
-                    Role.MECHANIC);
+            if (userRepository.count() == 0) {
+                createUser(userRepository, passwordEncoder, "Admin", "admin@vehicleyard.com", "password", Role.ADMIN);
+                createUser(userRepository, passwordEncoder, "Manager", "manager@vehicleyard.com", "password",
+                        Role.MANAGER);
+                createUser(userRepository, passwordEncoder, "Sales", "sales@vehicleyard.com", "password", Role.SALES);
+                createUser(userRepository, passwordEncoder, "Inventory", "inventory@vehicleyard.com", "password",
+                        Role.INVENTORY);
+                createUser(userRepository, passwordEncoder, "Mechanic", "mechanic@vehicleyard.com", "password",
+                        Role.MECHANIC);
+                System.out.println(">>> Demo users seeded successfully.");
+            } else {
+                System.out.println(">>> Users already exist, skipping seed.");
+            }
         };
     }
 
-    private void createUserIfMissing(UserRepository repo, BCryptPasswordEncoder encoder, String username, String email,
+    private void createUser(UserRepository repo, BCryptPasswordEncoder encoder, String username, String email,
             String password, Role role) {
-        if (repo.findByEmail(email).isPresent()) {
-            return;
-        }
-
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);

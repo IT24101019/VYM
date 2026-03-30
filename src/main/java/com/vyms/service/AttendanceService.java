@@ -81,18 +81,8 @@ public class AttendanceService {
 
     /**
      * Check-Out a worker for today.
-     * Attendance classification rules (applied on checkout):
-     *
-     *  OFF_DAY  : worked ≤ 60 minutes after check-in (employee left very early)
-     *  HALF_DAY : checked out between 13:00 and 13:30 (inclusive)
-     *  PRESENT  : worked 8 or more hours  ← full day
-     *
-     * For anything in between (> 60 min but not a recognised half-day window
-     * and < 8 h) we still keep PRESENT — the salary engine will simply not
-     * add OT since hours ≤ 8.
-     *
-     * OT calculation (PERMANENT only) is handled by SalaryCalculationService.
-     * CONTRACT workers receive no OT — just the daily wage.
+     * Requires a check-in record to exist with no check-out yet.
+     * Rule 2: Fails if check-out is less than 10 minutes after check-in.
      */
     public Attendance checkOut(Long userId) {
         User user = userRepository.findById(userId)
@@ -111,47 +101,22 @@ public class AttendanceService {
         }
 
         LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
-
-        // Company opens at 9:00 AM. If someone checks in earlier, count working
-        // time from 09:00 so we do not over-credit early arrivals.
-        LocalTime shiftStart = LocalTime.of(9, 0);
-        LocalTime effectiveStart = att.getCheckInTime().isBefore(shiftStart)
-                ? shiftStart
-                : att.getCheckInTime();
-
-        long minutesWorked = ChronoUnit.MINUTES.between(effectiveStart, now);
-
-        if (minutesWorked < 10) {
+        long minutesDiff = ChronoUnit.MINUTES.between(att.getCheckInTime(), now);
+        if (minutesDiff < 10) {
             throw new IllegalStateException(
                     "Check-out too soon after check-in! Minimum 10 minutes required. " +
-                            "Checked in at " + att.getCheckInTime() + " (" + minutesWorked + " min ago).");
+                            "Checked in at " + att.getCheckInTime() + " (" + minutesDiff + " min ago).");
         }
 
         att.setCheckOutTime(now);
 
-        // ── Classify the day ──────────────────────────────────────────────────
-        // Applies to all workers for attendance status; OT pay is only for PERMANENT.
-        // Rule 1: worked ≤ 60 minutes → OFF_DAY
-        if (minutesWorked <= 60) {
-            att.setStatus("OFF_DAY");
-        }
-        // Rule 2: checkout between 13:00 and 13:30 (inclusive) → HALF_DAY
-        else if (!now.isBefore(LocalTime.of(13, 0)) && !now.isAfter(LocalTime.of(13, 30))) {
+        // Auto-detect HALF_DAY: less than 4 hours worked
+        if (minutesDiff < 240) {
             att.setStatus("HALF_DAY");
-        }
-        // Rule 3: worked ≥ 480 minutes (8 hours) → PRESENT (full day, OT calculated later)
-        else if (minutesWorked >= 480) {
-            att.setStatus("PRESENT");
-        }
-        // Anything in between (> 1h, not half-day window, < 8h) → PRESENT
-        // No OT will be added since hours ≤ 8; not a recognised half-day window.
-        else {
-            att.setStatus("PRESENT");
         }
 
         return attendanceRepository.save(att);
     }
-
 
     /**
      * Mark a worker as Off Day for today.

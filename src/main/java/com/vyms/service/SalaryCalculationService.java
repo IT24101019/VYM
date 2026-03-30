@@ -42,7 +42,6 @@ public class SalaryCalculationService {
     private static final BigDecimal EPF_CO_RATE = new BigDecimal("0.12");
     private static final BigDecimal ETF_CO_RATE = new BigDecimal("0.03");
     private static final BigDecimal SIXTY = BigDecimal.valueOf(60);
-    private static final int OFF_DAY_ALLOWANCE = 5; // free off-days for PERMANENT workers per month
 
     private final UserRepository userRepository;
     private final AttendanceRepository attendanceRepository;
@@ -99,20 +98,16 @@ public class SalaryCalculationService {
                 .filter(a -> "HALF_DAY".equalsIgnoreCase(a.getStatus())).count();
         long absentDays = records.stream()
                 .filter(a -> "ABSENT".equalsIgnoreCase(a.getStatus())).count();
-        long offDays = records.stream()
-                .filter(a -> "OFF_DAY".equalsIgnoreCase(a.getStatus())).count();
 
         // Store attendance summary on payroll
         p.setPresentDays((int) presentDays);
         p.setHalfDays((int) halfDays);
         p.setAbsentDays((int) absentDays);
-        p.setOffDays((int) offDays);
 
         // ── Phase 1: Base Pay ─────────────────────────────────────────────────
         BigDecimal basePay = BigDecimal.ZERO;
         BigDecimal leaveDeduction = BigDecimal.ZERO;
         BigDecimal basicSalary = nvl(u.getSalaryRate());
-        int unpaidOffDays = 0;
 
         if ("CONTRACT".equals(type)) {
             BigDecimal daily = nvl(u.getDailyWage());
@@ -129,13 +124,7 @@ public class SalaryCalculationService {
                     : BigDecimal.ZERO;
             BigDecimal absentDeduct = dailyRate.multiply(BigDecimal.valueOf(absentDays));
             BigDecimal halfDayDeduct = dailyRate.multiply(HALF).multiply(BigDecimal.valueOf(halfDays));
-            // First 5 OFF_DAY entries are free; beyond that, treat as unpaid days
-            unpaidOffDays = (int) Math.max(0, offDays - OFF_DAY_ALLOWANCE);
-            BigDecimal extraOffDeduct = dailyRate.multiply(BigDecimal.valueOf(unpaidOffDays));
-
-            leaveDeduction = absentDeduct
-                    .add(halfDayDeduct)
-                    .add(extraOffDeduct);
+            leaveDeduction = absentDeduct.add(halfDayDeduct);
         }
 
         BigDecimal adjustedBase = basePay.subtract(leaveDeduction).max(BigDecimal.ZERO);
@@ -143,7 +132,6 @@ public class SalaryCalculationService {
         p.setBasePay(fmt(basePay));
         p.setLeaveDeduction(fmt(leaveDeduction));
         p.setAdjustedBasePay(fmt(adjustedBase));
-        p.setUnpaidOffDays(unpaidOffDays);
 
         // ── Phase 2: OT (PERMANENT workers only) ─────────────────────────────
         BigDecimal totalOtHours = BigDecimal.ZERO;

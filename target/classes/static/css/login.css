@@ -9,77 +9,29 @@
 
 body {
     min-height: 100vh;
-    background: radial-gradient(circle at top, rgba(59, 130, 246, 0.35), transparent 55%), #020817;
+    background: linear-gradient(145deg, #0c1a3a 0%, #0f2d64 50%, #0369a1 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
 }
 
 .login-page {
-    width: 100%;
-    max-width: 1100px;
-}
-
-.login-shell {
-    display: grid;
-    grid-template-columns: minmax(360px, 1fr) 420px;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(2, 8, 23, 0.45);
-}
-
-.login-hero {
-    position: relative;
-    background: linear-gradient(135deg, #05132a, #0a2a4d 55%, #0b3b6e);
-    padding: 48px;
-    color: #e2e8f0;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 18px;
-}
-
-.hero-image {
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-    display: block;
-    filter: drop-shadow(0 12px 20px rgba(15, 23, 42, 0.4));
-    object-fit: contain;
-    border-radius: 18px;
-}
-
-.hero-copy {
-    text-align: left;
-}
-
-.hero-eyebrow {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #7dd3fc;
-    margin-bottom: 6px;
-}
-
-.login-hero h1 {
-    font-size: 30px;
-    line-height: 1.2;
-    margin-bottom: 6px;
-    color: #f8fafc;
-}
-
-.hero-sub {
-    font-size: 15px;
-    color: #cbd5f5;
+    padding: 32px 16px;
 }
 
 /* ── Card ── */
 .login-card {
     background: #ffffff;
-    padding: 48px 44px;
-    max-width: 460px;
+    border-radius: 12px;
+    padding: 40px 36px;
+    width: 90%;
+    max-width: 420px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .login-card-logo {
@@ -232,28 +184,4 @@ body {
 .footer-brand {
     font-size: 12px;
     color: #9ca3af;
-}
-
-@media (max-width: 1024px) {
-    body {
-        padding: 16px;
-    }
-    .login-shell {
-        grid-template-columns: 1fr;
-    }
-    .login-hero {
-        min-height: 320px;
-    }
-}
-
-@media (max-width: 640px) {
-    .login-card {
-        padding: 32px 24px;
-    }
-    .login-hero {
-        padding: 32px 24px;
-    }
-    .login-card-logo img {
-        max-width: 180px !important;
-    }
 }

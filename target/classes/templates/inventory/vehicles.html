@@ -35,11 +35,6 @@
                     <i class="fas fa-car"></i> Vehicle Inventory
                 </a>
             </li>
-            <li class="nav-item">
-                <a th:href="@{/inventory/reports}" class="nav-link">
-                    <i class="fas fa-file-alt"></i> Reports
-                </a>
-            </li>
         </ul>
         <div class="sidebar-footer">
             <a th:href="@{/login}" class="nav-link">
@@ -58,15 +53,6 @@
             <button class="btn btn-primary" onclick="openAddModal()">
                 <i class="fas fa-plus"></i> Add Vehicle
             </button>
-        </div>
-
-        <div th:if="${uploadError}" style="margin-bottom: 16px; padding: 14px; border-radius: 8px; background: #fee2e2; color: #991b1b; display:flex; align-items:center; gap:8px;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span th:text="${uploadError}">Upload error message</span>
-        </div>
-        <div th:if="${successMsg}" style="margin-bottom: 16px; padding: 14px; border-radius: 8px; background: #ecfdf3; color: #166534; display:flex; align-items:center; gap:8px;">
-            <i class="fas fa-check-circle"></i>
-            <span th:text="${successMsg}">Success message</span>
         </div>
 
         <!-- Search & Filter Bar -->
@@ -375,7 +361,7 @@
             return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
         }
 
-        // Format model+year as "ModelName-Year" e.g. "supra 1997" â†’ "Supra-1997"
+        // Format model+year as "ModelName-Year" e.g. "supra 1997" → "Supra-1997"
         function formatModelYear(val) {
             val = val.trim();
             if (!val) return '';
@@ -385,11 +371,11 @@
                 const modelPart = toTitleCase(yearMatch[1].trim().replace(/[-\s]+$/, ''));
                 return (modelPart ? modelPart + '-' : '') + yearMatch[2];
             }
-            // No year detected â€“ just Title Case the whole thing
+            // No year detected – just Title Case the whole thing
             return toTitleCase(val);
         }
 
-        // Called onblur of model input â€“ reformats display in the field itself
+        // Called onblur of model input – reformats display in the field itself
         function formatModelInput() {
             const input = document.getElementById('modelInput');
             const formatted = formatModelYear(input.value);

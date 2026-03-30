@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -86,7 +86,7 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        /* â”€â”€ Attendance History â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ── Attendance History ───────────────────────── */
         .history-filter-card {
             background: #fff;
             border-radius: 12px;
@@ -288,9 +288,9 @@
             <div class="chart-container"><canvas id="attendanceChart"></canvas></div>
         </div>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
         <!--  Attendance History Search                                     -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
         <div class="history-filter-card">
             <div class="filter-title">
                 <i class="fas fa-history" style="color:#6366f1;"></i> Attendance History Search
@@ -306,7 +306,7 @@
                            title="Pick a month to auto-fill the date range">
                 </div>
 
-                <div class="filter-sep" style="padding-bottom:12px;">-- or custom range --</div>
+                <div class="filter-sep" style="padding-bottom:12px;">— or custom range —</div>
 
                 <!-- From date -->
                 <div class="fgroup">
@@ -336,7 +336,7 @@
             <div class="history-results-header">
                 <span class="htitle"><i class="fas fa-list-alt" style="color:#6366f1;margin-right:6px;"></i>History Results</span>
                 <span class="hcount"
-                      th:text="${historyRecords.size()} + ' record(s) -- ' + historyFrom + ' â†’ ' + historyTo">
+                      th:text="${historyRecords.size()} + ' record(s) — ' + historyFrom + ' → ' + historyTo">
                 </span>
             </div>
             <table>
@@ -352,19 +352,19 @@
                 </thead>
                 <tbody>
                     <tr th:each="rec : ${historyRecords}">
-                        <td style="font-weight:600;white-space:nowrap;" th:text="${rec.date}">--</td>
+                        <td style="font-weight:600;white-space:nowrap;" th:text="${rec.date}">—</td>
                         <td>
-                            <div style="font-weight:600;" th:text="${rec.user != null ? rec.user.username : '--'}">--</div>
+                            <div style="font-weight:600;" th:text="${rec.user != null ? rec.user.username : '—'}">—</div>
                             <div style="font-size:12px;color:var(--text-muted);" th:text="${rec.user != null ? rec.user.email : ''}"></div>
                         </td>
-                        <td th:text="${rec.user != null ? rec.user.role : '--'}">--</td>
+                        <td th:text="${rec.user != null ? rec.user.role : '—'}">—</td>
                         <td>
-                            <span th:if="${rec.checkInTime != null}" th:text="${rec.checkInTime}">--</span>
-                            <span th:unless="${rec.checkInTime != null}" style="color:var(--text-muted);">--</span>
+                            <span th:if="${rec.checkInTime != null}" th:text="${rec.checkInTime}">—</span>
+                            <span th:unless="${rec.checkInTime != null}" style="color:var(--text-muted);">—</span>
                         </td>
                         <td>
-                            <span th:if="${rec.checkOutTime != null}" th:text="${rec.checkOutTime}">--</span>
-                            <span th:unless="${rec.checkOutTime != null}" style="color:var(--text-muted);">--</span>
+                            <span th:if="${rec.checkOutTime != null}" th:text="${rec.checkOutTime}">—</span>
+                            <span th:unless="${rec.checkOutTime != null}" style="color:var(--text-muted);">—</span>
                         </td>
                         <td>
                             <span th:if="${rec.status == 'PRESENT'}"   class="badge badge-present">Present</span>
@@ -413,20 +413,20 @@
                         <td>
                             <span
                                 th:if="${todayRecordMap[emp.id] != null and todayRecordMap[emp.id].checkInTime != null}"
-                                th:text="${todayRecordMap[emp.id].checkInTime}">--</span>
+                                th:text="${todayRecordMap[emp.id].checkInTime}">—</span>
                             <span
                                 th:unless="${todayRecordMap[emp.id] != null and todayRecordMap[emp.id].checkInTime != null}"
-                                style="color:var(--text-muted);">--</span>
+                                style="color:var(--text-muted);">—</span>
                         </td>
 
                         <!-- Check-Out time -->
                         <td>
                             <span
                                 th:if="${todayRecordMap[emp.id] != null and todayRecordMap[emp.id].checkOutTime != null}"
-                                th:text="${todayRecordMap[emp.id].checkOutTime}">--</span>
+                                th:text="${todayRecordMap[emp.id].checkOutTime}">—</span>
                             <span
                                 th:unless="${todayRecordMap[emp.id] != null and todayRecordMap[emp.id].checkOutTime != null}"
-                                style="color:var(--text-muted);">--</span>
+                                style="color:var(--text-muted);">—</span>
                         </td>
 
                         <!-- Status badge -->
@@ -484,10 +484,10 @@
                                     </form>
                                 </th:block>
 
-                                <!-- Scenario C: OFF_DAY or fully done -- show stat and Undo -->
+                                <!-- Scenario C: OFF_DAY or fully done — show stat and Undo -->
                                 <th:block th:if="${todayStatusMap[emp.id] == 'OFF_DAY' or todayStatusMap[emp.id] == 'HALF_DAY' or (todayStatusMap[emp.id] == 'PRESENT' and todayRecordMap[emp.id] != null and todayRecordMap[emp.id].checkOutTime != null)}">
                                     <span th:if="${todayStatusMap[emp.id] == 'OFF_DAY'}"
-                                        style="color:var(--text-muted);font-size:12px; margin-right: 8px;">-- locked --</span>
+                                        style="color:var(--text-muted);font-size:12px; margin-right: 8px;">— locked —</span>
                                     <span
                                         th:if="${todayStatusMap[emp.id] == 'PRESENT' and todayRecordMap[emp.id] != null and todayRecordMap[emp.id].checkOutTime != null}"
                                         style="color:#10b981;font-size:12px; margin-right: 8px;"><i class="fas fa-check-circle"></i>

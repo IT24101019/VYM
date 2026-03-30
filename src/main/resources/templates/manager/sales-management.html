@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -237,7 +237,7 @@
                         onchange="loadVehicleData(this.value)">
                         <option value="" disabled selected>Choose a vehicle</option>
                         <option th:each="v : ${vehicles}" th:value="${v.id}"
-                            th:text="${(v.vehicleModel != null ? v.vehicleModel : 'Vehicle ' + v.id) + ' -- ' + (v.licensePlate != null ? v.licensePlate : '')}">
+                            th:text="${(v.vehicleModel != null ? v.vehicleModel : 'Vehicle ' + v.id) + ' — ' + (v.licensePlate != null ? v.licensePlate : '')}">
                             Vehicle</option>
                     </select>
                 </div>
