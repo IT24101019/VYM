@@ -21,6 +21,8 @@ public class SaleController {
 
     @GetMapping("/sales")
     public String listSales(Model model) {
-        return "redirect:/sales-dashboard/sales";
+        List<Sale> sales = saleService.findAll();
+        model.addAttribute("sales", sales);
+        return "sale-list";
     }
 }

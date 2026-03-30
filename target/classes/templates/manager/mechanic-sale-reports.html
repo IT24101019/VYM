@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -232,9 +232,9 @@
             </div>
         </div>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- SALES SECTION                                                  -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-shopping-cart" style="color:#3b82f6;margin-right:8px;"></i>Sales
             Overview</div>
 
@@ -304,14 +304,14 @@
                 </thead>
                 <tbody>
                     <tr th:each="row : ${profitRows}">
-                        <td style="font-weight:600;" th:text="${row.vehicle}">--</td>
+                        <td style="font-weight:600;" th:text="${row.vehicle}">—</td>
                         <td>
                             <span class="badge"
                                 th:classappend="${row.buyerType == 'REGULAR_CUSTOMER'} ? 'badge-regular' : (${row.buyerType == 'EXPORT'} ? 'badge-export' : 'badge-auction')"
                                 th:text="${row.buyerType == 'REGULAR_CUSTOMER'} ? 'Regular Customer' : (${row.buyerType == 'EXPORT'} ? 'Export' : 'Auction')">
-                                --</span>
+                                —</span>
                         </td>
-                        <td th:text="${row.saleDate}">--</td>
+                        <td th:text="${row.saleDate}">—</td>
                         <td th:text="${'$' + row.purchase}">$0</td>
                         <td th:text="${'$' + row.repair}">$0</td>
                         <td th:text="${'$' + row.salePrice}">$0</td>
@@ -331,9 +331,9 @@
 
         <hr class="divider-section">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- INVENTORY SECTION                                             -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-car" style="color:#8b5cf6;margin-right:8px;"></i>Inventory Overview
         </div>
 
@@ -362,9 +362,9 @@
 
         <hr class="divider-section">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- MECHANIC SECTION                                              -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-tools" style="color:#f59e0b;margin-right:8px;"></i>Mechanic &amp;
             Repair Overview</div>
 
@@ -395,26 +395,26 @@
                 <tbody>
                     <tr th:each="r : ${recentRepairs}">
                         <td>
-                            <div style="font-weight:600;" th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '--'}">
-                                --</div>
+                            <div style="font-weight:600;" th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '—'}">
+                                —</div>
                             <div style="font-size:12px;color:var(--text-muted);"
                                 th:text="${r.vehicle != null ? r.vehicle.licensePlate : ''}"></div>
                         </td>
-                        <td style="max-width:200px;" th:text="${r.description}">--</td>
+                        <td style="max-width:200px;" th:text="${r.description}">—</td>
                         <td>
                             <span class="repair-badge badge-int" th:if="${r.repairType == 'INTERNAL'}">Internal</span>
                             <span class="repair-badge badge-ext" th:if="${r.repairType == 'EXTERNAL'}">External</span>
                             <span th:if="${r.repairType != 'INTERNAL' and r.repairType != 'EXTERNAL'}"
-                                th:text="${r.repairType}">--</span>
+                                th:text="${r.repairType}">—</span>
                         </td>
                         <td style="font-weight:600;" th:text="${r.cost != null ? '$' + r.cost : '$0'}">$0</td>
-                        <td th:text="${r.repairDate}">--</td>
+                        <td th:text="${r.repairDate}">—</td>
                         <td>
                             <span class="repair-badge badge-inspected-r"
                                 th:if="${r.status == 'INSPECTED'}">Inspected</span>
                             <span class="repair-badge badge-pending-r" th:if="${r.status == 'PENDING'}">Pending</span>
                             <span th:if="${r.status != 'INSPECTED' and r.status != 'PENDING'}"
-                                th:text="${r.status}">--</span>
+                                th:text="${r.status}">—</span>
                         </td>
                     </tr>
                     <tr th:if="${recentRepairs == null or recentRepairs.empty}">
@@ -427,9 +427,9 @@
 
         <hr class="divider-section">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <!-- EDIT RECORDS SECTION (Manager only)                          -->
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
         <div class="section-title"><i class="fas fa-edit" style="color:#6366f1;margin-right:8px;"></i>Edit Records</div>
 
         <div class="section-tabs">
@@ -461,7 +461,7 @@
                         <tr th:each="r : ${repairs}">
                             <td>
                                 <div style="font-weight:600;"
-                                    th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '--'}">Vehicle</div>
+                                    th:text="${r.vehicle != null ? r.vehicle.vehicleModel : '—'}">Vehicle</div>
                                 <div style="font-size:12px;color:var(--info);"
                                     th:text="${r.vehicle != null ? r.vehicle.licensePlate : ''}">Plate</div>
                             </td>
@@ -471,7 +471,7 @@
                                 <span th:if="${r.repairType == 'EXTERNAL'}" class="badge badge-warning"
                                     style="background:#fef3c7;color:#f59e0b;">External</span>
                                 <span th:if="${r.repairType != 'INTERNAL' and r.repairType != 'EXTERNAL'}"
-                                    th:text="${r.repairType}">--</span>
+                                    th:text="${r.repairType}">—</span>
                             </td>
                             <td class="font-bold" th:text="${r.cost != null ? '$' + r.cost : '$0'}">$0</td>
                             <td th:text="${r.repairDate}">Date</td>
@@ -479,7 +479,7 @@
                                 <span th:if="${r.status == 'INSPECTED'}" class="badge badge-inspected">Inspected</span>
                                 <span th:if="${r.status == 'PENDING'}" class="badge badge-pending">Pending</span>
                                 <span th:if="${r.status != 'INSPECTED' and r.status != 'PENDING'}"
-                                    th:text="${r.status}">--</span>
+                                    th:text="${r.status}">—</span>
                             </td>
                             <td>
                                 <button class="btn btn-outline btn-sm" th:data-id="${r.id}"
@@ -523,21 +523,21 @@
                         <tr th:each="s : ${sales}">
                             <td>
                                 <div style="font-weight:600;"
-                                    th:text="${s.vehicle != null ? s.vehicle.vehicleModel : '--'}">Vehicle</div>
+                                    th:text="${s.vehicle != null ? s.vehicle.vehicleModel : '—'}">Vehicle</div>
                                 <div style="font-size:12px;color:var(--info);"
                                     th:text="${s.vehicle != null ? s.vehicle.licensePlate : ''}">Plate</div>
                             </td>
                             <td>
                                 <div style="font-weight:600;"
-                                    th:text="${s.customerName != null ? s.customerName : '--'}">Customer</div>
+                                    th:text="${s.customerName != null ? s.customerName : '—'}">Customer</div>
                                 <div style="font-size:12px;color:var(--text-muted);"
                                     th:text="${s.email != null ? s.email : ''}">email</div>
                             </td>
                             <td>
                                 <span class="badge" style="background:#dbeafe;color:#1d4ed8;"
-                                    th:text="${s.buyerType != null ? s.buyerType.name() : '--'}">Type</span>
+                                    th:text="${s.buyerType != null ? s.buyerType.name() : '—'}">Type</span>
                             </td>
-                            <td class="font-bold" th:text="${s.salePrice != null ? '$' + s.salePrice : '--'}">$0</td>
+                            <td class="font-bold" th:text="${s.salePrice != null ? '$' + s.salePrice : '—'}">$0</td>
                             <td>
                                 <span
                                     th:if="${s.profit != null and s.profit.compareTo(T(java.math.BigDecimal).ZERO) >= 0}"
@@ -552,7 +552,7 @@
                                     class="badge badge-finalized">Finalized</span>
                                 <span th:if="${s.saleStatus == 'DRAFT'}" class="badge badge-draft">Draft</span>
                                 <span th:if="${s.saleStatus != 'FINALIZED' and s.saleStatus != 'DRAFT'}"
-                                    th:text="${s.saleStatus}" class="badge badge-draft">--</span>
+                                    th:text="${s.saleStatus}" class="badge badge-draft">—</span>
                             </td>
                             <td>
                                 <button class="btn btn-outline btn-sm" th:data-id="${s.id}"
@@ -667,7 +667,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script th:inline="javascript">
-        // â”€â”€ Data from server â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Data from server ───────────────────────────────────────────────────
         const monthLabels = /*[[${monthLabels}]]*/[];
         const monthlyRevenue = /*[[${monthlyRevenue}]]*/[];
         const monthlyProfit = /*[[${monthlyProfit}]]*/[];
@@ -678,7 +678,7 @@
         const btFriendly = buyerTypeLabels.map(l =>
             l === 'REGULAR_CUSTOMER' ? 'Regular Customer' : (l === 'EXPORT' ? 'Export' : 'Auction'));
 
-        // â”€â”€ Monthly Revenue & Profit Bar Chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Monthly Revenue & Profit Bar Chart ────────────────────────────────
         new Chart(document.getElementById('profitRevenueChart'), {
             type: 'bar',
             data: {
@@ -698,7 +698,7 @@
             }
         });
 
-        // â”€â”€ Buyer Type Pie Chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Buyer Type Pie Chart ──────────────────────────────────────────────
         new Chart(document.getElementById('buyerTypeChart'), {
             type: 'pie',
             data: {
@@ -714,7 +714,7 @@
             }
         });
 
-        // â”€â”€ Monthly Repair Cost Bar Chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Monthly Repair Cost Bar Chart ─────────────────────────────────────
         new Chart(document.getElementById('repairCostChart'), {
             type: 'bar',
             data: {
@@ -731,7 +731,7 @@
             }
         });
 
-        // â”€â”€ Edit section tab toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Edit section tab toggle ───────────────────────────────────────────
         function showEditSection(id, btn) {
             document.querySelectorAll('.edit-section').forEach(el => el.classList.remove('visible'));
             document.querySelectorAll('.section-tab').forEach(el => el.classList.remove('active'));
@@ -739,7 +739,7 @@
             btn.classList.add('active');
         }
 
-        // â”€â”€ Repair modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Repair modal ──────────────────────────────────────────────────────
         function openRepairModalFromBtn(btn) {
             const d = btn.dataset;
             document.getElementById('repairForm').action = '/manager/reports/repair/edit/' + d.id;
@@ -751,7 +751,7 @@
         }
         function closeRepairModal() { document.getElementById('repairModal').classList.remove('active'); }
 
-        // â”€â”€ Sale modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Sale modal ────────────────────────────────────────────────────────
         function openSaleModalFromBtn(btn) {
             const d = btn.dataset;
             document.getElementById('saleForm').action = '/manager/reports/sale/edit/' + d.id;

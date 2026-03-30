@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * Admin-only salary management.
  * Admin views attendance-based payroll and can set worker rates.
- * Managers can ONLY do attendance; contract type is set here by Admin.aaa
+ * Managers can ONLY do attendance; contract type is set here by Admin.
  */
 @Controller
 @RequestMapping("/admin/salary")

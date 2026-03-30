@@ -1,9 +1,9 @@
-﻿/* Mechanic CSS - same base as inventory */
+/* Mechanic CSS - same base as inventory */
 :root {
     --primary: #1d4ed8;
-    --sidebar-bg: #334155;
-    --sidebar-hover: #475569;
-    --sidebar-active: #2563eb;
+    --sidebar-bg: #0f172a;
+    --sidebar-hover: #1e293b;
+    --sidebar-active: #3b82f6;
     --text-main: #0f172a;
     --text-muted: #64748b;
     --text-light: #f8fafc;
@@ -47,12 +47,11 @@ body {
     position: fixed;
     height: 100vh;
     z-index: 100;
-    box-shadow: 4px 0 20px rgba(15, 23, 42, 0.12);
 }
 
 .sidebar-header {
     padding: 24px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-header h2 {
@@ -62,7 +61,7 @@ body {
 }
 
 .sidebar-header p {
-    color: #dbeafe;
+    color: #94a3b8;
     font-size: 12px;
 }
 
@@ -92,7 +91,7 @@ body {
 }
 
 .user-info p {
-    color: #dbeafe;
+    color: #94a3b8;
     font-size: 11px;
 }
 
@@ -111,7 +110,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    color: #e2e8f0;
+    color: #cbd5e1;
     text-decoration: none;
     border-radius: 8px;
     font-size: 14px;
@@ -127,7 +126,6 @@ body {
 .nav-link.active {
     background: var(--sidebar-active);
     color: white;
-    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
 }
 
 .nav-link i {
@@ -138,7 +136,7 @@ body {
 
 .sidebar-footer {
     padding: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Main */
@@ -160,7 +158,6 @@ body {
 .page-title h1 {
     font-size: 26px;
     font-weight: 700;
-    color: #111827;
     margin-bottom: 4px;
 }
 
@@ -241,7 +238,6 @@ body {
     border-radius: 12px;
     padding: 22px;
     border: 1px solid var(--border);
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -658,26 +654,25 @@ select.form-control {
 .sidebar-logo img:hover { opacity: 0.85; }
 .sidebar-header {
     padding: 20px 20px 16px !important;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.15);
 }
-.sidebar-header h2 { font-size: 15px !important; color: #eff6ff !important; }
-.sidebar-header p  { font-size: 11px !important; color: #dbeafe !important; }
+.sidebar-header h2 { font-size: 15px !important; color: #e0f2fe !important; }
+.sidebar-header p  { font-size: 11px !important; color: #7dd3fc !important; }
 
 /* -- Professional UI Polish -- */
 /* Enhanced nav active state */
 .nav-link.active {
-    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+    background: linear-gradient(135deg, #2563eb, #0369a1) !important;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.4);
 }
 /* Metric card hover lift */
 .metric-card {
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .metric-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
 }
 /* Table row hover */
 tbody tr:hover {
@@ -692,14 +687,12 @@ tbody tr:hover {
     transition: box-shadow 0.2s;
 }
 .chart-card:hover, .table-card:hover {
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
 }
 /* Page title gradient */
 .page-title h1 {
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
-

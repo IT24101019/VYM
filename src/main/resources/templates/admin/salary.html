@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -373,20 +373,20 @@
                                 <span th:if="${p.employmentType == 'CONTRACT'}"
                                     class="badge badge-contract">Contract</span>
                             </td>
-                            <td style="text-align:center;" th:text="${p.presentDays != null ? p.presentDays : '--'}"></td>
-                            <td style="text-align:center;" th:text="${p.halfDays != null ? p.halfDays : '--'}"></td>
-                            <td style="text-align:center;" th:text="${p.absentDays != null ? p.absentDays : '--'}"></td>
+                            <td style="text-align:center;" th:text="${p.presentDays != null ? p.presentDays : '—'}"></td>
+                            <td style="text-align:center;" th:text="${p.halfDays != null ? p.halfDays : '—'}"></td>
+                            <td style="text-align:center;" th:text="${p.absentDays != null ? p.absentDays : '—'}"></td>
                             <td style="text-align:right;" th:text="'$'+${#numbers.formatDecimal(p.basePay, 1, 2)}">
                             </td>
                             <td style="text-align:right;color:#ef4444;"
-                                th:text="${p.leaveDeduction != null and p.leaveDeduction > 0 ? '-$'+#numbers.formatDecimal(p.leaveDeduction,1,2) : '--'}">
+                                th:text="${p.leaveDeduction != null and p.leaveDeduction > 0 ? '-$'+#numbers.formatDecimal(p.leaveDeduction,1,2) : '—'}">
                             </td>
                             <td style="text-align:right;" th:text="'$'+${#numbers.formatDecimal(p.otPay != null ? p.otPay : 0, 1, 2)}">
                             </td>
                             <td style="text-align:right;font-weight:600;"
                                 th:text="'$'+${#numbers.formatDecimal(p.grossSalary, 1, 2)}"></td>
                             <td style="text-align:right;color:#ef4444;"
-                                th:text="${p.epfEmployee != null and p.epfEmployee > 0 ? '-$'+#numbers.formatDecimal(p.epfEmployee,1,2) : '--'}">
+                                th:text="${p.epfEmployee != null and p.epfEmployee > 0 ? '-$'+#numbers.formatDecimal(p.epfEmployee,1,2) : '—'}">
                             </td>
                             <td style="text-align:right;font-weight:700;color:#10b981;"
                                 th:text="'$'+${#numbers.formatDecimal(p.netSalary, 1, 2)}"></td>

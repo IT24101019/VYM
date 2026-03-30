@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -417,7 +417,7 @@
                 document.getElementById('editModelInput').value = editFormatModelYear(rawModel) || rawModel;
                 editSyncVehicleModel();
             } else {
-                // Unknown brand â€“ prefill as-is
+                // Unknown brand – prefill as-is
                 const parts = existing.split(' ');
                 document.getElementById('editBrandTyped').value = editToTitleCase(parts[0]);
                 editBrandConfirmed = editToTitleCase(parts[0]);
